@@ -10,8 +10,9 @@ void freeAllMemory(score_t* ptr) {
 }
 
 int main(int argc, char* argv[]) {
-	char	header[SCORES_HEADER_LENGTH];
-	score_t	score;
+	const char*	outname = "scores_merged.bin";
+	char		header[SCORES_HEADER_LENGTH];
+	score_t		score;
 
 	if(argc > 1) {
 		databaseInit(32);
@@ -43,8 +44,11 @@ int main(int argc, char* argv[]) {
 		}
 
 		scoreFree(&score);
-		if(!databaseSave("scores_merged.bin", header))
+
+		if(!databaseSave(outname, header))
 			fprintf(stderr, "ERROR: Could not write file!\n");
+		else
+			printf("DONE! Scanned %d songs and written merged scores to %s\n", databaseSize(), outname);
 		databaseFree();
 	} else
 		printf("Usage: %s [path to file 1] [path to file 2] ...\n", argv[0]);
