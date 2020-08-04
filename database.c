@@ -46,8 +46,8 @@ int databaseCompareScores(int index, score_t elem) {
 					database[index].instr[j].fullCombo	= 1;
 				if(elem.instr[i].stars > database[index].instr[j].stars)
 					database[index].instr[j].stars		= elem.instr[i].stars;
+				break;
 			}
-			break;
 		}
 		if(!found) {
 			if((database[index].instr = realloc(database[index].instr, (database[index].instrCount + 1) * sizeof *database[index].instr)) != NULL)
