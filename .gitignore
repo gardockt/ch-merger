@@ -5,3 +5,6 @@ ch-merger
 *.o
 *.gch
 
+# Input/output files
+scores.bin*
+scores_merged.bin
