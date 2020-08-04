@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -8,3 +9,4 @@ void	databaseFree();
 int		databaseSize();
 int		databaseAdd(score_t);
 score_t	databaseGet(int);
+int		databaseSave(char*, char*);

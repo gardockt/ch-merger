@@ -24,18 +24,21 @@ void writeScore(score_t score) {
 
 int main() {
 	const char* filename = "scores.bin";
+	char header[SCORES_HEADER_LENGTH];
 	score_t score;
 	
 	databaseInit(32);
 	scoreAlloc(&score);
 	scoresOpen(filename);
+	memcpy(header, scoresGetHeader(), SCORES_HEADER_LENGTH);
+
 	while(scoresGetNext(&score))
 		databaseAdd(score);
+	
 	scoresClose();
 	scoreFree(&score);
 
-	for(int i = 0; i < databaseSize(); i++)
-		writeScore(databaseGet(i));
+	databaseSave("scores_merged.bin", header);
 	databaseFree();
 	return 0;
 }

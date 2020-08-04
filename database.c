@@ -1,4 +1,5 @@
 #include "database.h"
+#include "scores.h"
 
 score_t* database;
 int maxSize, filledSize;
@@ -76,3 +77,23 @@ int databaseAdd(score_t elem) {
 score_t databaseGet(int index) {
 	return database[index];
 }
+
+int databaseSave(char* filename, char* header) {
+	FILE* file = fopen(filename, "wb");
+	if(file != NULL) {
+		if(!fwrite(header, SCORES_HEADER_LENGTH, 1, file)) {
+			fclose(file);
+			return 0;
+		}
+		for(int i = 0; i < filledSize; i++) {
+			if(!scoresSave(file, database[i])) {
+				fclose(file);
+				return 0;
+			}
+		}
+		fclose(file);
+		return 1;
+	} else
+		return 0;
+}
+
