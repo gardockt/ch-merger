@@ -23,6 +23,10 @@ int databaseDoubleSize() {
 		return 0;
 }
 
+int compareInstr(const void* a, const void* b) {
+	return ((instr_t*)a)->id - ((instr_t*)b)->id;
+}
+
 void databaseCompareScores(int index, score_t elem) {
 	int found;
 	for(int i = 0; i < elem.instrCount; i++) {
@@ -50,7 +54,10 @@ void databaseCompareScores(int index, score_t elem) {
 			break;
 		}
 	}
-	// TODO: sort instruments by ID
+	
+	// sort instruments by ID
+	if(database[index].instrCount > 1)
+		qsort(database[index].instr, database[index].instrCount, sizeof *database[index].instr, compareInstr);
 }
 
 int databaseSize() {
