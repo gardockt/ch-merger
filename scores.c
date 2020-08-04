@@ -15,7 +15,8 @@ int scoresOpen(const char* filename) {
 }
 
 void scoresClose() {
-	fclose(file);
+	if(file != NULL)
+		fclose(file);
 }
 
 int scoresGetNext(score_t* score) {

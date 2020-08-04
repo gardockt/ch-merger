@@ -27,7 +27,11 @@ int main(int argc, char* argv[]) {
 		scoreAlloc(&score);
 
 		for(int i = 1; i < argc; i++) {
-			scoresOpen(argv[i]);
+			if(!scoresOpen(argv[i])) {
+				fprintf(stderr, "ERROR: Cannot read file %s!\n", argv[i]);
+				freeAllMemory(&score);
+				return 3;
+			}
 
 			// header check
 			if(i > 1) {
@@ -56,7 +60,7 @@ int main(int argc, char* argv[]) {
 		if(!databaseSave(outname, header))
 			fprintf(stderr, "ERROR: Could not write file!\n");
 		else
-			printf("DONE! Scanned %d songs and written merged scores to %s\n", databaseSize(), outname);
+			printf("DONE! Scanned %d songs and wrote merged scores to %s\n", databaseSize(), outname);
 		databaseFree();
 	} else
 		printf("Usage: %s [path to file 1] [path to file 2] ...\n", argv[0]);
