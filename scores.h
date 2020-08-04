@@ -6,7 +6,7 @@
 
 #include "score.h"
 
-#define SCORES_HEADER_LENGTH	8
+#define SCORES_HEADER_LENGTH	4
 #define SCORES_HASH_LENGTH		32
 #define SCORES_DATA_LENGTH		50
 

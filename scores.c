@@ -8,6 +8,7 @@ int scoresOpen(const char* filename) {
 	file = fopen(filename, "rb");
 	if(file != NULL) {
 		fread(header, SCORES_HEADER_LENGTH, 1, file);
+		fseek(file, 4, SEEK_CUR);
 		return 1;
 	} else
 		return 0;
