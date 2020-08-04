@@ -1,0 +1,7 @@
+# Executable
+ch-merger
+
+# Linker files
+*.o
+*.gch
+
