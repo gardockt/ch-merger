@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 
 typedef struct {
 	char			id;
@@ -26,5 +27,6 @@ typedef struct {
 
 int		scoreAlloc(score_t*);
 void	scoreFree(score_t*);
+void	scoreCopy(score_t*, score_t*);
 
 #endif

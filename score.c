@@ -13,3 +13,12 @@ void scoreFree(score_t* score) {
 	}
 	return;
 }
+
+void scoreCopy(score_t* src, score_t* elem) {
+	strcpy(src->hash, elem->hash);
+	src->instrCount = elem->instrCount;
+	src->playCount = elem->playCount;
+	memcpy(&src->unknown, &elem->unknown, 2);
+	memcpy(&src->instr, &elem->instr, sizeof elem->instr * elem->instrCount);
+}
+
