@@ -27,7 +27,7 @@ int compareInstr(const void* a, const void* b) {
 	return ((instr_t*)a)->id - ((instr_t*)b)->id;
 }
 
-void databaseCompareScores(int index, score_t elem) {
+int databaseCompareScores(int index, score_t elem) {
 	int found;
 	for(int i = 0; i < elem.instrCount; i++) {
 		found = 0;
@@ -47,17 +47,21 @@ void databaseCompareScores(int index, score_t elem) {
 				if(elem.instr[i].stars > database[index].instr[j].stars)
 					database[index].instr[j].stars		= elem.instr[i].stars;
 			}
-			if(!found) {
-				if(realloc(database[index].instr, (database[index].instrCount + 1) * sizeof *database[index].instr) != NULL)
-					memcpy(&database[index].instr[database[index].instrCount++], &elem.instr[i], sizeof elem.instr[i]);
-			}
 			break;
+		}
+		if(!found) {
+			if((database[index].instr = realloc(database[index].instr, (database[index].instrCount + 1) * sizeof *database[index].instr)) != NULL)
+				memcpy(&database[index].instr[database[index].instrCount++], &elem.instr[i], sizeof elem.instr[i]);
+			else
+				return 0;
 		}
 	}
 	
 	// sort instruments by ID
 	if(database[index].instrCount > 1)
 		qsort(database[index].instr, database[index].instrCount, sizeof *database[index].instr, compareInstr);
+
+	return 1;
 }
 
 int databaseSize() {
@@ -68,8 +72,7 @@ int databaseAdd(score_t elem) {
 	for(int i = 0; i < filledSize; i++) {
 		if(!strcmp(database[i].hash, elem.hash)) {
 			database[i].playCount += elem.playCount;
-			databaseCompareScores(i, elem);
-			return 1;
+			return databaseCompareScores(i, elem);
 		}
 	}
 
