@@ -59,7 +59,6 @@ int databaseSize() {
 int databaseAdd(score_t elem) {
 	for(int i = 0; i < filledSize; i++) {
 		if(!strcmp(database[i].hash, elem.hash)) {
-			printf("%s i %s są takie same [i=%d]\n", database[i].hash, elem.hash, i);
 			database[i].playCount += elem.playCount;
 			databaseCompareScores(i, elem);
 			return 1;

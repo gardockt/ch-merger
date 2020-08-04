@@ -21,22 +21,7 @@ void writeScore(score_t score) {
 	}
 	printf("\n");
 }
-/*
-int main() {
-	const char* filename = "scores.bin";
-	score_t score;
 
-	scoreAlloc(&score);
-	scoresOpen(filename);
-
-	while(scoresGetNext(&score))
-		writeScore(&score);
-
-	scoresClose();
-	scoreFree(&score);
-	return 0;
-}
-*/
 int main() {
 	const char* filename = "scores.bin";
 	score_t score;
