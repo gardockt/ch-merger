@@ -9,12 +9,20 @@ void freeAllMemory(score_t* ptr) {
 	databaseFree();
 }
 
+int confirmation() {
+	printf("WARNING: Backing up your scores.bin is STRONGLY recommended. I do not take responsibility for any damage caused by this program. Are you sure? [y/n] ");
+	return getchar() == 'y';
+}
+
 int main(int argc, char* argv[]) {
 	const char*	outname = "scores_merged.bin";
 	char		header[SCORES_HEADER_LENGTH];
 	score_t		score;
 
 	if(argc > 1) {
+		if(!confirmation())
+			return 0;
+
 		databaseInit(32);
 		scoreAlloc(&score);
 
