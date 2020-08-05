@@ -26,7 +26,7 @@ int scoresGetNext(score_t* score) {
 		fread(&score->playCount,			 1, 1, file)	&&	// play count
 		fread( score->unknown,				 2, 1, file)		// ???
 	) {
-		score->instr = malloc(score->instrCount * sizeof *score->instr);
+		score->instr = realloc(score->instr, score->instrCount * sizeof *score->instr);
 		for(int i = 0; i < score->instrCount; i++) {
 			if(	!fread(&score->instr[i].id,			1, 1, file)	||
 				!fread(&score->instr[i].unknown,	1, 1, file)	||
