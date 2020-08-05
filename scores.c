@@ -57,15 +57,15 @@ int scoresSave(FILE* f, score_t score) {
 		fwrite( score.unknown,				 2, 1, f)	 // ???
 	) {
 		for(int i = 0; i < score.instrCount; i++) {
-			if(	!fwrite(&score.instr[i].id,			1, 1, file)	||
-				!fwrite(&score.instr[i].unknown,	1, 1, file)	||
-				!fwrite(&score.instr[i].difficulty,	1, 1, file)	||
-				!fwrite(&score.instr[i].percentage,	1, 1, file)	||
-				!fwrite(&score.instr[i].fullCombo,	1, 1, file)	||
-				!fwrite(&score.instr[i].speed,		2, 1, file)	||
-				!fwrite(&score.instr[i].stars,		1, 1, file)	||
-				!fwrite(&score.instr[i].modifiers,	1, 1, file)	||
-				!fwrite(&score.instr[i].highscore,	4, 1, file)
+			if(	!fwrite(&score.instr[i].id,			1, 1, f)	||
+				!fwrite(&score.instr[i].unknown,	1, 1, f)	||
+				!fwrite(&score.instr[i].difficulty,	1, 1, f)	||
+				!fwrite(&score.instr[i].percentage,	1, 1, f)	||
+				!fwrite(&score.instr[i].fullCombo,	1, 1, f)	||
+				!fwrite(&score.instr[i].speed,		2, 1, f)	||
+				!fwrite(&score.instr[i].stars,		1, 1, f)	||
+				!fwrite(&score.instr[i].modifiers,	1, 1, f)	||
+				!fwrite(&score.instr[i].highscore,	4, 1, f)
 			)
 				return 0;
 		}

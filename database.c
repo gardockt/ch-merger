@@ -12,6 +12,8 @@ int databaseInit(int startSize) {
 }
 
 void databaseFree() {
+	for(int i = 0; i < filledSize; i++)
+		scoreFree(&database[i]);
 	free(database);
 }
 
