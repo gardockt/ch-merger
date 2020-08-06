@@ -19,6 +19,16 @@ void scoresClose() {
 		fclose(file);
 }
 
+// to be removed in the future
+void checkAssertions(score_t* score) {
+	if(score->unknown[0] != 0 || score->unknown[1] != 0)
+		printf("Song with hash %s does not match first assertion (%d %d). This is not an error, though I would be happy if you messaged me about how did you play this song (played instrument, used controller, online mode, version etc.) :)\n", score->hash, score->unknown[0], score->unknown[1]);
+	for(int i = 0; i < score->instrCount; i++) {
+		if(score->instr[i].unknown != 0)
+			printf("Song with hash %s played on instrument %d (PB: %d, %d%, %d stars) does not match second assertion (%d). This is not an error, though I would be happy if you messaged me about how did you play this song (used instruments, online mode, version etc.) :)\n", score->hash, score->instr[i].id, score->instr[i].highscore, score->instr[i].percentage, score->instr[i].stars, score->instr[i].unknown);
+	}
+}
+
 int scoresGetNext(score_t* score) {
 	if(	fseek(file,	1, SEEK_CUR) >= 0 						&&	// block begin
 		fread( score->hash,	SCORES_HASH_LENGTH, 1, file)	&&	// chart hash
@@ -40,6 +50,7 @@ int scoresGetNext(score_t* score) {
 			)
 				return 0;
 		}
+		checkAssertions(score);
 		return 1;
 	} else
 		return 0;
