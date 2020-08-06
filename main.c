@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 			// header check
 			if(i > 1) {
 				if(strcmp(header, scoresGetHeader())) {
-					fprintf(stderr, "ERROR: Header mismatch! If you want to continue at your own risk, replace the header (first %d characters) in file %s.\n", SCORES_HEADER_LENGTH, argv[i]);
+					fprintf(stderr, "ERROR: Header mismatch in file %s!\n", argv[i]);
 					freeAllMemory(&score);
 					return 1;
 				}
