@@ -34,5 +34,5 @@ ch-merger: $(LIBS)
 ch-merger.exe: $(LIBS)
 	$(CC) $(FLAGS) -o $@ $^
 
-%.o: %.c %.h
+%.o: src/%.c src/%.h
 	$(CC) $(FLAGS) -c $<
