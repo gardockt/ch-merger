@@ -16,7 +16,7 @@ int confirmation() {
 
 int main(int argc, char* argv[]) {
 	const char*	outname = "scores_merged.bin";
-	char		header[SCORES_HEADER_LENGTH];
+	int			version;
 	score_t		score;
 
 	if(argc > 1) {
@@ -33,15 +33,15 @@ int main(int argc, char* argv[]) {
 				return 3;
 			}
 
-			// header check
+			// version check
 			if(i > 1) {
-				if(strncmp(header, scoresGetHeader(), SCORES_HEADER_LENGTH)) {
-					fprintf(stderr, "ERROR: Header mismatch in file %s!\n", argv[i]);
+				if(version != scoresGetVersion()) {
+					fprintf(stderr, "ERROR: Version mismatch in file %s!\n", argv[i]);
 					freeAllMemory(&score);
 					return 1;
 				}
 			} else
-				memcpy(header, scoresGetHeader(), SCORES_HEADER_LENGTH);
+				version = scoresGetVersion();
 
 			// writing
 			while(scoresGetNext(&score)) {
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
 
 		scoreFree(&score);
 
-		if(!databaseSave(outname, header))
+		if(!databaseSave(outname, version))
 			fprintf(stderr, "ERROR: Could not write file!\n");
 		else
 			printf("DONE! Scanned %d songs and wrote merged scores to %s\n", databaseSize(), outname);

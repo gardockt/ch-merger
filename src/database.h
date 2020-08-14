@@ -9,4 +9,4 @@ void	databaseFree();
 int		databaseSize();
 int		databaseAdd(score_t);
 score_t	databaseGet(int);
-int		databaseSave(const char*, const char*);
+int		databaseSave(const char*, int);

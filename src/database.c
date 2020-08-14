@@ -90,10 +90,10 @@ score_t databaseGet(int index) {
 	return database[index];
 }
 
-int databaseSave(const char* filename, const char* header) {
+int databaseSave(const char* filename, int version) {
 	FILE* file = fopen(filename, "wb");
 	if(file != NULL) {
-		if(!fwrite(header, SCORES_HEADER_LENGTH, 1, file) || !fwrite(&filledSize, sizeof filledSize, 1, file)) {
+		if(!fwrite(&version, 4, 1, file) || !fwrite(&filledSize, sizeof filledSize, 1, file)) {
 			fclose(file);
 			return 0;
 		}

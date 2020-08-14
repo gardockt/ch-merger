@@ -2,12 +2,12 @@
 #include "score.h"
 
 FILE* file;
-char header[SCORES_HEADER_LENGTH];
+int version;
 
 int scoresOpen(const char* filename) {
 	file = fopen(filename, "rb");
 	if(file != NULL) {
-		fread(header, SCORES_HEADER_LENGTH, 1, file);
+		fread(&version, 4, 1, file);
 		fseek(file, 4, SEEK_CUR);
 		return 1;
 	} else
@@ -56,8 +56,8 @@ int scoresGetNext(score_t* score) {
 		return 0;
 }
 
-char* scoresGetHeader() {
-	return header;
+int scoresGetVersion() {
+	return version;
 }
 
 int scoresSave(FILE* f, score_t score) {
