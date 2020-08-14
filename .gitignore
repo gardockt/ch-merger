@@ -8,3 +8,7 @@ ch-merger*
 # Input/output files
 scores.bin*
 scores_merged.bin
+
+# Tests (I don't think sharing savefiles is a good idea)
+test/
+test.sh
