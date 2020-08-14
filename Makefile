@@ -21,14 +21,16 @@ endif
 
 
 
+.PHONY: clean test
+
 all: $(OUTPUT)
 
 clean:
 	rm *.o ch-merger*
 
 test:
-	@echo y | ./ch-merger testdata/in.1 testdata/in.2 > /dev/null
-	@cmp -s scores_merged.bin testdata/out
+	@echo y | ./ch-merger test/in.1 test/in.2 > /dev/null
+	@cmp -s scores_merged.bin test/out
 	@if [ $$? -eq 0 ]; then \
 		echo 'Test completed successfully!'; \
 	else \

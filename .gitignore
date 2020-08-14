@@ -10,4 +10,4 @@ scores.bin*
 scores_merged.bin
 
 # Tests (I don't think sharing savefiles is a good idea)
-testdata/
+test/
