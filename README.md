@@ -5,7 +5,7 @@ Tool for merging Clone Hero scores from different savefiles.
 
 Features:
 * Merging scores, FC and percentage separately
-* Summing play count
+* Adding up play count
 * Support for multiple files
 
 ## How to use
