@@ -5,6 +5,9 @@
 #include <stdint.h>
 #include <string.h>
 
+#define SCORES_HASH_LENGTH		32
+#define SCORES_DATA_LENGTH		50
+
 typedef struct {
 	char			id;
 	char			unknown;

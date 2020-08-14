@@ -6,9 +6,6 @@
 
 #include "score.h"
 
-#define SCORES_HASH_LENGTH		32
-#define SCORES_DATA_LENGTH		50
-
 int		scoresOpen(const char*);
 void	scoresClose();
 int		scoresGetNext(score_t*);

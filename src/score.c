@@ -1,10 +1,10 @@
 #include "score.h"
 
 int scoreAlloc(score_t* score) {
-	score->hash		= malloc(32 + 1);
+	score->hash		= malloc(SCORES_HASH_LENGTH + 1);
 	score->unknown	= malloc(2);
 	score->instr	= NULL;
-	score->hash[32]	= '\0';
+	score->hash[SCORES_HASH_LENGTH] = '\0';
 	return score->hash != NULL && score->unknown != NULL;
 }
 
